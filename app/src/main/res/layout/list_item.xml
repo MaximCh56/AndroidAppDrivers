@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="6dp">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:freezesText="false"
+        android:textAlignment="center"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/textViewBirthDate"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_toEndOf="@+id/title"
+        android:layout_toRightOf="@+id/title"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/textViewSex"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="11dp"
+        android:layout_marginStart="11dp"
+        android:layout_toEndOf="@+id/textViewBirthDate"
+        android:layout_toRightOf="@+id/textViewBirthDate"
+        android:text=""
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/textViewCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="18sp"
+        android:layout_marginLeft="11dp"
+        android:layout_marginStart="11dp"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/textViewSex" />
+
+
+</RelativeLayout>

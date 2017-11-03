@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.pk1.driverstable.MainActivity">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerViewDrivers"
+        android:layout_width="match_parent"
+        android:layout_height="150dp" />
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/logonFormButtons"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/recyclerViewDrivers"
+        android:baselineAligned="true"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/buttonDeleteDriver"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="удалить" />
+    </LinearLayout>
+
+    <AutoCompleteTextView
+        android:id="@+id/autoCompleteTextViewSearchDrivers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/logonFormButtons"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:id="@+id/editTextName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editTextPatronymic"
+        android:layout_alignStart="@+id/editTextPatronymic"
+        android:layout_below="@+id/editTextBirthDate"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:hint="Имя"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/editTextSurname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editTextName"
+        android:layout_alignStart="@+id/editTextName"
+        android:layout_below="@+id/editTextName"
+        android:layout_marginTop="13dp"
+        android:ems="10"
+        android:hint="Фамилия"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/editTextPatronymic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTextSurname"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="Отчество"
+        android:inputType="textPersonName" />
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/editTextPatronymic"
+        android:layout_marginTop="19dp"
+        android:orientation="horizontal"
+        android:id="@+id/radioGroup2">
+
+        <RadioButton
+            android:id="@+id/radioButtonMen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="мужчина" />
+
+        <RadioButton
+            android:id="@+id/radioButtonWoman"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="женщина" />
+    </RadioGroup>
+
+    <Spinner
+        android:id="@+id/spinnerCategory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="56dp"
+        android:layout_alignTop="@+id/radioGroup2"
+        android:layout_toEndOf="@+id/radioGroup2"
+        android:layout_toRightOf="@+id/radioGroup2" />
+
+    <Button
+        android:id="@+id/buttonSaveDriver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/radioGroup2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="сохранить" />
+
+    <EditText
+        android:id="@+id/editTextBirthDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editTextName"
+        android:layout_alignStart="@+id/editTextName"
+        android:layout_below="@+id/autoCompleteTextViewSearchDrivers"
+        android:ems="10"
+        android:hint="Дата рождения"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/textViewAge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/editTextBirthDate"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="11dp"
+        android:layout_marginRight="11dp"
+        android:textSize="24sp" />
+
+</RelativeLayout>
