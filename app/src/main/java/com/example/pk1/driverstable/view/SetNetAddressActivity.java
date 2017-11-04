@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.pk1.driverstable.MainActivity;
 import com.example.pk1.driverstable.R;
 
 import butterknife.BindView;

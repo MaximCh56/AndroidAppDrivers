@@ -1,7 +1,6 @@
-package com.example.pk1.driverstable;
+package com.example.pk1.driverstable.view;
 
 import android.graphics.Color;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,14 +19,12 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.pk1.driverstable.R;
 import com.example.pk1.driverstable.model.POJO.Category;
 import com.example.pk1.driverstable.model.POJO.Driver;
-import com.example.pk1.driverstable.model.POJO.ServerAnswer;
-import com.example.pk1.driverstable.model.network.APIClient;
-import com.example.pk1.driverstable.model.network.APIInterface;
 import com.example.pk1.driverstable.presenter.MainPresenter;
 import com.example.pk1.driverstable.presenter.MainPresenterImpl;
-import com.example.pk1.driverstable.view.MainView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -38,8 +35,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import retrofit2.Call;
-import retrofit2.Callback;
 import ru.tinkoff.decoro.MaskImpl;
 import ru.tinkoff.decoro.parser.UnderscoreDigitSlotsParser;
 import ru.tinkoff.decoro.slots.Slot;
@@ -84,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
                 Slot[] slots = new UnderscoreDigitSlotsParser().parseSlots("____-__-__");
                 FormatWatcher formatWatcher = new MaskFormatWatcher(MaskImpl.createTerminated(slots));
                 formatWatcher.installOn(editTextBirthDate);
-                mainPresenter=new MainPresenterImpl(this,url);
+                mainPresenter=new MainPresenterImpl(this,url,this);
                 autoCompleteTextViewSearchDrivers.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
