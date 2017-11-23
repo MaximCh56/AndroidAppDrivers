@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import com.example.pk1.driverstable.model.POJO.Category;
 import com.example.pk1.driverstable.model.POJO.Driver;
 import com.example.pk1.driverstable.model.POJO.ServerAnswer;
-import com.example.pk1.driverstable.model.network.APIClient;
 import com.example.pk1.driverstable.model.network.APIInterface;
 import com.example.pk1.driverstable.model.network.NetworkAvailable;
 import com.example.pk1.driverstable.view.MainView;
@@ -21,10 +20,10 @@ public class MainPresenterImpl implements MainPresenter {
     private APIInterface apiInterface;
     private Context context;
 
-    public MainPresenterImpl(MainView mainView, String url, Context context) {
+    public MainPresenterImpl(MainView mainView,  Context context,APIInterface apiInterface) {
         this.mainView = mainView;
         this.context = context;
-        apiInterface = APIClient.getApi(url);
+        this.apiInterface = apiInterface;
 
     }
 

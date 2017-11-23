@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.example.pk1.driverstable.R;
 import com.example.pk1.driverstable.model.POJO.Category;
 import com.example.pk1.driverstable.model.POJO.Driver;
+import com.example.pk1.driverstable.model.network.APIClient;
 import com.example.pk1.driverstable.presenter.MainPresenter;
 import com.example.pk1.driverstable.presenter.MainPresenterImpl;
 
@@ -89,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
         Slot[] slots = new UnderscoreDigitSlotsParser().parseSlots("____-__-__");
         FormatWatcher formatWatcher = new MaskFormatWatcher(MaskImpl.createTerminated(slots));
         formatWatcher.installOn(editTextBirthDate);
-        mainPresenter = new MainPresenterImpl(this, "10.0.2.2", this);
+        mainPresenter = new MainPresenterImpl(this, this, APIClient.getApi("10.0.2.2"));
         autoCompleteTextViewSearchDrivers.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
