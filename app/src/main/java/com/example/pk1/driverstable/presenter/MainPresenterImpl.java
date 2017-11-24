@@ -1,12 +1,12 @@
 package com.example.pk1.driverstable.presenter;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
 import android.support.annotation.NonNull;
 import com.example.pk1.driverstable.model.POJO.Category;
 import com.example.pk1.driverstable.model.POJO.Driver;
 import com.example.pk1.driverstable.model.POJO.ServerAnswer;
 import com.example.pk1.driverstable.model.network.APIInterface;
-import com.example.pk1.driverstable.model.network.NetworkAvailable;
 import com.example.pk1.driverstable.view.MainView;
 import java.util.List;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -28,7 +28,7 @@ public class MainPresenterImpl implements MainPresenter {
 
     @Override
     public void editDriver(Driver driver) {
-        if (NetworkAvailable.isNetworkAvailable(context)) {
+        if (isNetworkAvailable(context)) {
             apiInterface.editDriver(driver)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -53,7 +53,7 @@ public class MainPresenterImpl implements MainPresenter {
 
     @Override
     public void getCategory() {
-        if (NetworkAvailable.isNetworkAvailable(context)) {
+      //  if (isNetworkAvailable(context)) {
             apiInterface.doGetListCategory()
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -68,14 +68,15 @@ public class MainPresenterImpl implements MainPresenter {
                             mainView.showMessage("An error occurred during networking "+ e);
                         }
                     });
-        } else {
-            mainView.showMessage("An error occurred during networking");
-        }
+            System.out.println("category");
+//        } else {
+//            mainView.showMessage("An error occurred during networking");
+//        }
     }
 
     @Override
     public void searchDrivers(String s) {
-        if (NetworkAvailable.isNetworkAvailable(context)) {
+        if (isNetworkAvailable(context)) {
             apiInterface.doGetListDrivers(s)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -93,6 +94,11 @@ public class MainPresenterImpl implements MainPresenter {
         } else {
             mainView.showMessage("An error occurred during networking");
         }
+    }
+
+    public  boolean isNetworkAvailable(final Context context) {
+        final ConnectivityManager connectivityManager = ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE));
+        return connectivityManager.getActiveNetworkInfo() != null && connectivityManager.getActiveNetworkInfo().isConnected();
     }
 
 }

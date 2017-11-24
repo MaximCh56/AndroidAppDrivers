@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
     List<Driver> drivers;
     Driver selectedDriver;
     int selected_position;
-    Category category;
+    public Category category;
     boolean isPressed;
     RecyclerViewAdapter adapter;
     SimpleDateFormat simpleDateFormat;
@@ -218,6 +218,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
     @Override
     public void showCategory(Category category) {
+        System.out.println("category activity");
         this.category = category;
         ArrayAdapter<String> adapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_spinner_item, category.getCategory().toArray(new String[category.getCategory().size()]));
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
