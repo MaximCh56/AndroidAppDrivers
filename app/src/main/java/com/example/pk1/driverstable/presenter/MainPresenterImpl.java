@@ -2,18 +2,17 @@ package com.example.pk1.driverstable.presenter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-
 import com.example.pk1.driverstable.model.POJO.Category;
 import com.example.pk1.driverstable.model.POJO.Driver;
 import com.example.pk1.driverstable.model.POJO.ServerAnswer;
 import com.example.pk1.driverstable.model.network.APIInterface;
 import com.example.pk1.driverstable.model.network.NetworkAvailable;
 import com.example.pk1.driverstable.view.MainView;
-
 import java.util.List;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.observers.DisposableSingleObserver;
+import io.reactivex.schedulers.Schedulers;
 
-import retrofit2.Call;
-import retrofit2.Callback;
 
 public class MainPresenterImpl implements MainPresenter {
     private MainView mainView;
@@ -30,20 +29,23 @@ public class MainPresenterImpl implements MainPresenter {
     @Override
     public void editDriver(Driver driver) {
         if (NetworkAvailable.isNetworkAvailable(context)) {
-            apiInterface.editDriver(driver).enqueue(new Callback<ServerAnswer>() {
-                @Override
-                public void onResponse(@NonNull Call<ServerAnswer> call, @NonNull retrofit2.Response<ServerAnswer> response) {
-                    if (response.body().getSuccess()) {
-                        mainView.showMessage("Success");
-                        mainView.updateDataDriverView();
-                    }
-                }
+            apiInterface.editDriver(driver)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new DisposableSingleObserver<ServerAnswer>() {
+                        @Override
+                        public void onSuccess(@NonNull ServerAnswer message) {
+                            if (message.getSuccess()) {
+                                mainView.showMessage("Success");
+                                mainView.updateDataDriverView();
+                            }
+                        }
 
-                @Override
-                public void onFailure(@NonNull Call<ServerAnswer> call, @NonNull Throwable t) {
-                    mainView.showMessage("An error occurred during networking");
-                }
-            });
+                        @Override
+                        public void onError(@NonNull Throwable e) {
+                            mainView.showMessage("An error occurred during networking "+ e);
+                        }
+                    });
         } else {
             mainView.showMessage("An error occurred during networking");
         }
@@ -52,17 +54,20 @@ public class MainPresenterImpl implements MainPresenter {
     @Override
     public void getCategory() {
         if (NetworkAvailable.isNetworkAvailable(context)) {
-            apiInterface.doGetListCategory().enqueue(new Callback<Category>() {
-                @Override
-                public void onResponse(@NonNull Call<Category> call, @NonNull retrofit2.Response<Category> response) {
-                    mainView.showCategory(response.body());
-                }
+            apiInterface.doGetListCategory()
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new DisposableSingleObserver<Category>() {
+                        @Override
+                        public void onSuccess(@NonNull Category category) {
+                            mainView.showCategory(category);
+                        }
 
-                @Override
-                public void onFailure(@NonNull Call<Category> call, @NonNull Throwable t) {
-                    mainView.showMessage("An error occurred during networking");
-                }
-            });
+                        @Override
+                        public void onError(@NonNull Throwable e) {
+                            mainView.showMessage("An error occurred during networking "+ e);
+                        }
+                    });
         } else {
             mainView.showMessage("An error occurred during networking");
         }
@@ -71,17 +76,20 @@ public class MainPresenterImpl implements MainPresenter {
     @Override
     public void searchDrivers(String s) {
         if (NetworkAvailable.isNetworkAvailable(context)) {
-            apiInterface.doGetListDrivers(s).enqueue(new Callback<List<Driver>>() {
-                @Override
-                public void onResponse(@NonNull Call<List<Driver>> call, @NonNull retrofit2.Response<List<Driver>> response) {
-                    mainView.showSelectDrivers(response.body());
-                }
+            apiInterface.doGetListDrivers(s)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new DisposableSingleObserver<List<Driver>>() {
+                        @Override
+                        public void onSuccess(@NonNull List<Driver> drivers) {
+                            mainView.showSelectDrivers(drivers);
+                        }
+                        @Override
+                        public void onError(@NonNull Throwable e) {
+                            mainView.showMessage("An error occurred during networking "+ e);
+                        }
+                    });
 
-                @Override
-                public void onFailure(@NonNull Call<List<Driver>> call, @NonNull Throwable t) {
-                    mainView.showMessage("An error occurred during networking");
-                }
-            });
         } else {
             mainView.showMessage("An error occurred during networking");
         }
