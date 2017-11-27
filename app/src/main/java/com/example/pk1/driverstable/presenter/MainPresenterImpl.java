@@ -1,7 +1,6 @@
 package com.example.pk1.driverstable.presenter;
 
 import android.content.Context;
-import android.net.ConnectivityManager;
 import android.support.annotation.NonNull;
 import com.example.pk1.driverstable.model.POJO.Category;
 import com.example.pk1.driverstable.model.POJO.Driver;
@@ -53,7 +52,7 @@ public class MainPresenterImpl implements MainPresenter {
 
     @Override
     public void getCategory() {
-      //  if (isNetworkAvailable(context)) {
+        if (isNetworkAvailable(context)) {
             apiInterface.doGetListCategory()
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -68,10 +67,9 @@ public class MainPresenterImpl implements MainPresenter {
                             mainView.showMessage("An error occurred during networking "+ e);
                         }
                     });
-            System.out.println("category");
-//        } else {
-//            mainView.showMessage("An error occurred during networking");
-//        }
+        } else {
+            mainView.showMessage("An error occurred during networking");
+        }
     }
 
     @Override
@@ -96,9 +94,10 @@ public class MainPresenterImpl implements MainPresenter {
         }
     }
 
-    public  boolean isNetworkAvailable(final Context context) {
-        final ConnectivityManager connectivityManager = ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE));
-        return connectivityManager.getActiveNetworkInfo() != null && connectivityManager.getActiveNetworkInfo().isConnected();
+      private boolean isNetworkAvailable(final Context context) {
+//        final ConnectivityManager connectivityManager = ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE));
+//        return connectivityManager.getActiveNetworkInfo() != null && connectivityManager.getActiveNetworkInfo().isConnected();
+        return true;
     }
 
 }
