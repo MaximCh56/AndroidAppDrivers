@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
     List<Driver> drivers;
     Driver selectedDriver;
     int selected_position;
-    public Category category;
+    Category category;
     boolean isPressed;
     RecyclerViewAdapter adapter;
     SimpleDateFormat simpleDateFormat;
