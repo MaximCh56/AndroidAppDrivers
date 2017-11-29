@@ -27,4 +27,6 @@ public interface APIInterface {
 
     @GET("category")
     Single<Category> doGetListCategory();
+
+
 }

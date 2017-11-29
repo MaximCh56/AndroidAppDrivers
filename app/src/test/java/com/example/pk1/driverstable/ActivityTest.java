@@ -1,11 +1,13 @@
 package com.example.pk1.driverstable;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
 import android.support.annotation.NonNull;
 import com.example.pk1.driverstable.model.POJO.Category;
 import com.example.pk1.driverstable.model.network.APIInterface;
 import com.example.pk1.driverstable.presenter.MainPresenter;
 import com.example.pk1.driverstable.presenter.MainPresenterImpl;
+import com.example.pk1.driverstable.view.MainActivity;
 import com.example.pk1.driverstable.view.MainView;
 
 import org.junit.Before;

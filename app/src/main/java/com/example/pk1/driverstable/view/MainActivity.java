@@ -90,7 +90,8 @@ public class MainActivity extends AppCompatActivity implements MainView {
         Slot[] slots = new UnderscoreDigitSlotsParser().parseSlots("____-__-__");
         FormatWatcher formatWatcher = new MaskFormatWatcher(MaskImpl.createTerminated(slots));
         formatWatcher.installOn(editTextBirthDate);
-        mainPresenter = new MainPresenterImpl(this, this, APIClient.getApi());
+        mainPresenter = new MainPresenterImpl(this, APIClient.getApi());
+        mainPresenter.attach(this);
         autoCompleteTextViewSearchDrivers.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -119,6 +120,12 @@ public class MainActivity extends AppCompatActivity implements MainView {
         buttonSaveDriver.setClickable(false);
         mainPresenter.getCategory();
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mainPresenter.detach();
     }
 
     @OnClick(R.id.buttonDeleteDriver)
